@@ -1,6 +1,5 @@
 package br.com.rest_assured.test;
 
-import org.hamcrest.Matchers;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
@@ -15,7 +14,7 @@ import io.restassured.builder.ResponseSpecBuilder;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		tags = {"@PUTteste1"}, 
+		tags = {"@POSTteste2"}, 
 		features = "src/test/resources/br/com/rest_assured/features/", 
 		glue = "br.com.rest_assured.steps", 
 		snippets = SnippetType.CAMELCASE,
