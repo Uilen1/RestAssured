@@ -1,13 +1,14 @@
 package br.com.rest_assured.steps;
 
-import cucumber.api.java.gl.E;
-import cucumber.api.java.pt.Dado;
-
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
+import static br.com.rest_assured.core.GlobalValidatableResponse.getvResponse;
+import static io.restassured.RestAssured.given;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import cucumber.api.java.gl.E;
+import cucumber.api.java.pt.Dado;
+import cucumber.api.java.pt.Então;
 
 
 
@@ -45,6 +46,14 @@ public class BaseStep{
 			.extract().path("token")		
 		;
 		
+	}
+	
+	@Então("^é retornado o status code \"(.*?)\"$")
+	public void éRetornadoOStatusCode(String statusCode) throws Throwable {
+		
+		getvResponse().log().all().statusCode(Integer.parseInt(statusCode));
+//		getvResponse().statusCode(Integer.parseInt(statusCode));
+				
 	}
 	
 }

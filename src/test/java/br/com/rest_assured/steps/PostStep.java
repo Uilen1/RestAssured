@@ -1,24 +1,22 @@
 package br.com.rest_assured.steps;
 
-import cucumber.api.java.gl.E;
-import cucumber.api.java.it.Quando;
-import cucumber.api.java.pt.Então;
-import io.restassured.response.ValidatableResponse;
-
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.assertEquals;
+import static br.com.rest_assured.core.GlobalValidatableResponse.setvResponse;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.is;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Assert;
-
 import br.com.rest_assured.core.MovimentacaoBean;
+import cucumber.api.java.it.Quando;
+import cucumber.api.java.pt.Então;
+import io.restassured.response.ValidatableResponse;
 
 public class PostStep {
 	
-	private ValidatableResponse Vresponse;
+	private ValidatableResponse vResponse;
 
 
 	@Quando("^insiro uma conta com nome \"(.*?)\" na rota \"(.*?)\"$")
@@ -27,7 +25,7 @@ public class PostStep {
 		Map<String, String> conta = new HashMap<String, String>();
 		conta.put("nome", nome);
 
-		Vresponse = 
+		vResponse = 
 		given()
 			.header("Authorization", "JWT " + BaseStep.token)
 			.body(conta)
@@ -35,6 +33,8 @@ public class PostStep {
 			.post(rota)
 		.then()
 		;
+		
+		setvResponse(vResponse);
 	}
 	
 	@Quando("^insiro uma movimentação pelo id \"(.*?)\", descrição \"(.*?)\", envolvido \"(.*?)\",tipo \"(.*?)\", data transação \"(.*?)\", data pagamento \"(.*?)\", valor \"(.*?)\" e status \"(.*?)\" na rota \"(.*?)\"$")
@@ -50,7 +50,7 @@ public class PostStep {
 		mov.setValor(Float.parseFloat(valor));
 		mov.setStatus(Boolean.parseBoolean(status));
 		
-		Vresponse = 
+		vResponse = 
 				given()
 					.header("Authorization", "JWT " + BaseStep.token)
 					.body(mov)
@@ -58,13 +58,14 @@ public class PostStep {
 					.post(rota)
 				.then()
 				;
+		setvResponse(vResponse);
 		
 	}
 	
 	@Quando("^não insiro nenhum campo obrigatório na rota \"(.*?)\"$")
 	public void nãoInsiroNenhumCampoObrigatórioNaRota(String rota) throws Throwable {
 
-		Vresponse = 
+		vResponse = 
 				given()
 					.header("Authorization", "JWT " + BaseStep.token)
 					.body("{}")
@@ -72,13 +73,14 @@ public class PostStep {
 					.post(rota)
 				.then()
 				;
+		setvResponse(vResponse);
 		
 	}
 	
 	@Então("^é retornado para a inserção de dados o status code \"(.*?)\"$")
 	public void é_retornado_para_a_inserção_de_dados_o_status_code(String statusCode) throws Throwable {
 
-		Vresponse
+		vResponse
 			.statusCode(is(Integer.parseInt(statusCode)))
 		;
 		
@@ -86,7 +88,7 @@ public class PostStep {
 	
 	@Então("^é retornado para a inserção de dados já existentes o status code \"(.*?)\" com a mensagem de erro \"(.*?)\"$")
 	public void éRetornadoParaAInserçãoDeDadosOStatusCodeComAMensagemDeErro(String statusCode, String mensagem) throws Throwable {
-		Vresponse
+		vResponse
 			.statusCode(is(Integer.parseInt(statusCode)))
 			.body("error", is(mensagem))
 		;
@@ -95,7 +97,7 @@ public class PostStep {
 	@Então("^valido todas as mensagens obrigatórias e o status code \"(.*?)\"$")
 	public void validoTodasAsMensagensObrigatóriasEOStatusCode(String statusCode) throws Throwable {
 
-		Vresponse
+		vResponse
 		.statusCode(is(Integer.parseInt(statusCode)))
 		.body("msg", hasItems(
 					"Data da Movimentação é obrigatório",
@@ -107,6 +109,18 @@ public class PostStep {
 					"Conta é obrigatório",
 					"Situação é obrigatório"				
 				))
+		;
+		
+	}
+	
+	@Então("^valido a mensagem para data da movimentação e o status code \"(.*?)\"$")
+	public void validoAMensagemParaDataDaMovimentaçãoEOStatusCode(String statusCode) throws Throwable {
+
+
+		vResponse
+		.log().all()
+		.statusCode(is(Integer.parseInt(statusCode)))
+		.body("msg", hasItem("Data da Movimentação deve ser menor ou igual à data atual"))
 		;
 		
 	}
