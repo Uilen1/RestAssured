@@ -14,7 +14,7 @@ import io.restassured.builder.ResponseSpecBuilder;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		tags = {"@DELETEteste1"}, 
+		tags = {"@POSTteste1"}, 
 		features = "src/test/resources/br/com/rest_assured/features/", 
 		glue = "br.com.rest_assured.steps", 
 		snippets = SnippetType.CAMELCASE,

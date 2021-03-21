@@ -3,6 +3,8 @@ package br.com.rest_assured.steps;
 import static br.com.rest_assured.core.GlobalValidatableResponse.getvResponse;
 import static io.restassured.RestAssured.given;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,6 +15,7 @@ import br.com.rest_assured.utilities.PathDataJson;
 import cucumber.api.java.gl.E;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.Então;
+import io.restassured.path.json.JsonPath;
 
 
 
@@ -24,12 +27,16 @@ public class BaseStep{
 	private String email;
 	private String senha;
 	
+	public <T> T initData(String nomeMassaJson, Class<T> classeBean) throws FileNotFoundException {
+		PathDataJson.setJsonData(nomeMassaJson);
+		Gson deserialized = new Gson();
+		return deserialized.fromJson(PathDataJson.getJsonData(), classeBean);
+	}
+	
 	@Dado("^que todoas as massas estão iniciadas$")
 	public void queTodoasAsMassasEstãoIniciadas() throws Throwable {
 		
-		PathDataJson.setJsonData("nome");
-		Gson deserialized = new Gson();
-		conta = deserialized.fromJson(PathDataJson.getJsonData(), NameAccountBean.class);
+		conta = initData("nome", NameAccountBean.class);
 		
 	}
 	
