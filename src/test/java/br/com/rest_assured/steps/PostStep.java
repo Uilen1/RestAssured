@@ -6,10 +6,15 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.is;
 
+import java.io.File;
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.gson.Gson;
+
 import br.com.rest_assured.core.MovimentacaoBean;
+import br.com.rest_assured.core.NameAccountBean;
 import cucumber.api.java.it.Quando;
 import cucumber.api.java.pt.Então;
 import io.restassured.response.ValidatableResponse;
@@ -22,16 +27,18 @@ public class PostStep {
 	@Quando("^insiro uma conta com nome \"(.*?)\" na rota \"(.*?)\"$")
 	public void insiro_uma_conta_com_nome(String nome, String rota) throws Throwable {
 
-		Map<String, String> conta = new HashMap<String, String>();
-		conta.put("nome", nome);
-
+//		Map<String, String> conta = new HashMap<String, String>();
+//		conta.put("nome", nome);
+		
 		vResponse = 
 		given()
 			.header("Authorization", "JWT " + BaseStep.token)
-			.body(conta)
+			.body(BaseStep.conta)
+			.log().all()
 		.when()
 			.post(rota)
 		.then()
+		.log().all()
 		;
 		
 		setvResponse(vResponse);
