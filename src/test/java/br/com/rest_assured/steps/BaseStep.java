@@ -1,21 +1,18 @@
 package br.com.rest_assured.steps;
 
-import static br.com.rest_assured.core.GlobalValidatableResponse.getvResponse;
-import static io.restassured.RestAssured.given;
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.google.gson.Gson;
-
 import br.com.rest_assured.core.NameAccountBean;
 import br.com.rest_assured.utilities.PathDataJson;
+import com.google.gson.Gson;
 import cucumber.api.java.gl.E;
 import cucumber.api.java.pt.Dado;
 import cucumber.api.java.pt.Então;
-import io.restassured.path.json.JsonPath;
+
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
+
+import static br.com.rest_assured.core.GlobalValidatableResponse.getvResponse;
+import static io.restassured.RestAssured.given;
 
 
 

@@ -1,23 +1,21 @@
 package br.com.rest_assured.core;
 
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.builder.ResponseSpecBuilder;
 import org.hamcrest.Matchers;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
-import cucumber.api.CucumberOptions;
-import cucumber.api.SnippetType;
-import cucumber.api.junit.Cucumber;
-import io.restassured.RestAssured;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.builder.ResponseSpecBuilder;
-
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		tags = {"@Validado"}, 
-		features = "src/test/resources/br/com/desafiolivelo/features/", 
-		glue = "br.com.desafiolivelo.steps", 
-		snippets = SnippetType.CAMELCASE,
+		tags = {"@Validado"},
+		features = "src/test/resources/br/com/rest_assured/features/",
+		glue = "br.com.rest_assured.steps",
+		snippets = CucumberOptions.SnippetType.CAMELCASE,
 		plugin = {
 				"pretty", 
 				"html:target/cucumber-reports",
