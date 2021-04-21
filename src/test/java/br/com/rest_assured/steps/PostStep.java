@@ -1,23 +1,13 @@
 package br.com.rest_assured.steps;
 
+import br.com.rest_assured.core.MovimentacaoBean;
+import io.cucumber.java.pt.Então;
+import io.cucumber.java.pt.Quando;
+import io.restassured.response.ValidatableResponse;
+
 import static br.com.rest_assured.core.GlobalValidatableResponse.setvResponse;
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.is;
-
-import java.io.File;
-import java.io.FileReader;
-import java.util.HashMap;
-import java.util.Map;
-
-import com.google.gson.Gson;
-
-import br.com.rest_assured.core.MovimentacaoBean;
-import br.com.rest_assured.core.NameAccountBean;
-import cucumber.api.java.it.Quando;
-import cucumber.api.java.pt.Então;
-import io.restassured.response.ValidatableResponse;
+import static org.hamcrest.Matchers.*;
 
 public class PostStep {
 	

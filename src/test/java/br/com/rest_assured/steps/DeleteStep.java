@@ -1,10 +1,10 @@
 package br.com.rest_assured.steps;
 
-import cucumber.api.java.pt.Quando;
+import io.cucumber.java.pt.Quando;
 import io.restassured.response.ValidatableResponse;
 
 import static br.com.rest_assured.core.GlobalValidatableResponse.setvResponse;
-import static io.restassured.RestAssured.*;
+import static io.restassured.RestAssured.given;
 
 
 

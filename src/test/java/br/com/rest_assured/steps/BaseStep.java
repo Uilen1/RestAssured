@@ -3,9 +3,9 @@ package br.com.rest_assured.steps;
 import br.com.rest_assured.core.NameAccountBean;
 import br.com.rest_assured.utilities.PathDataJson;
 import com.google.gson.Gson;
-import cucumber.api.java.gl.E;
-import cucumber.api.java.pt.Dado;
-import cucumber.api.java.pt.Então;
+import io.cucumber.java.pt.Dado;
+import io.cucumber.java.pt.E;
+import io.cucumber.java.pt.Então;
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;

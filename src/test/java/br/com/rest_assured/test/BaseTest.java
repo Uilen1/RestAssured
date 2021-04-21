@@ -1,12 +1,11 @@
 package br.com.rest_assured.test;
 
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 import br.com.rest_assured.core.Constants;
-import cucumber.api.CucumberOptions;
-import cucumber.api.SnippetType;
-import cucumber.api.junit.Cucumber;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -14,10 +13,10 @@ import io.restassured.builder.ResponseSpecBuilder;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		tags = {"@POSTteste1"}, 
+		tags = {"@POSTteste1"},
 		features = "src/test/resources/br/com/rest_assured/features/", 
 		glue = "br.com.rest_assured.steps", 
-		snippets = SnippetType.CAMELCASE,
+		snippets = CucumberOptions.SnippetType.CAMELCASE,
 		plugin = {
 				"pretty", 
 				"html:target/cucumber-reports",

@@ -1,12 +1,12 @@
 package br.com.rest_assured.steps;
 
-import cucumber.api.java.pt.Então;
-import cucumber.api.java.pt.Quando;
+import io.cucumber.java.pt.Então;
+import io.cucumber.java.pt.Quando;
 import io.restassured.response.ValidatableResponse;
 
 import static br.com.rest_assured.core.GlobalValidatableResponse.setvResponse;
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.is;
 
 public class GetStep{
 	
